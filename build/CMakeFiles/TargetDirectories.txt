@@ -1,0 +1,3 @@
+/home/py715/AdvancedDB17CW2/build/CMakeFiles/rebuild_cache.dir
+/home/py715/AdvancedDB17CW2/build/CMakeFiles/edit_cache.dir
+/home/py715/AdvancedDB17CW2/build/CMakeFiles/ADBCoursework2.dir

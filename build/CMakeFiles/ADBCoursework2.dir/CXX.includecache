@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/py715/AdvancedDB17CW2/ADBCoursework2.cpp
+cstdlib
+-
+fstream
+-
+future
+-
+iostream
+-
+libproc.h
+-
+numeric
+-
+set
+-
+unistd.h
+-
+Implementation.hpp
+/home/py715/AdvancedDB17CW2/Implementation.hpp
+
+/home/py715/AdvancedDB17CW2/Implementation.cpp
+Implementation.hpp
+/home/py715/AdvancedDB17CW2/Implementation.hpp
+iostream
+-
+
+/home/py715/AdvancedDB17CW2/Implementation.hpp
+memory
+-
+string
+-
+unordered_set
+-
+vector
+-
+
