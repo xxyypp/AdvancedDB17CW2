@@ -4,9 +4,7 @@
 using namespace std;
 //////////////////// Nested Loop Joins ////////////////////
 
-std::vector<std::string> getQualifyingBusinessesIDsVector(Businesses const& b, float latMin,
-																													float latMax, float longMin,
-																													float longMax) {
+std::vector<std::string> getQualifyingBusinessesIDsVector(Businesses const& b, float latMin,float latMax, float longMin,float longMax) {
 	// This function needs to find all businesses that have within the
 	// specified latitude/longitude range and store their ids in the result vector
 	std::cout << "function getQualifyingBusinessesIDsVector not implemented" << std::endl;
@@ -28,9 +26,7 @@ performNestedLoopJoinAndAggregation(Reviews const& r, std::vector<std::string> c
 
 //////////////////// Hash Join ////////////////////
 
-std::unordered_set<std::string> getQualifyingBusinessesIDs(Businesses const& b, float latMin,
-																													 float latMax, float longMin,
-																													 float longMax) {
+std::unordered_set<std::string> getQualifyingBusinessesIDs(Businesses const& b, float latMin,float latMax, float longMin,float longMax) {
 	// This function needs to find all businesses that have within the
 	// specified latitude/longitude range and store their ids in the result set
 	std::cout << "function getQualifyingBusinessesIDs not implemented" << std::endl;
@@ -38,8 +34,7 @@ std::unordered_set<std::string> getQualifyingBusinessesIDs(Businesses const& b, 
 }
 
 std::vector<unsigned long>
-aggregateStarsOfQualifyingBusinesses(Reviews const& r,
-																		 std::unordered_set<std::string> const& qualifyingBusinesses) {
+aggregateStarsOfQualifyingBusinesses(Reviews const& r,std::unordered_set<std::string> const& qualifyingBusinesses) {
 	// The second parameter of this function is the set of qualifying
 	// business ids you have created in the first function
 
