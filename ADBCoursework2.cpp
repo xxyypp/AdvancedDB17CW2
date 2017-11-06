@@ -70,18 +70,13 @@ std::shared_ptr<Businesses const> getBusinesses() {
 	return std::shared_ptr<Businesses const>(const_cast<Businesses const*>(r.release()));
 }
 
-std::vector<size_t> performQueryUsingHashJoin(std::shared_ptr<Reviews const> r,
-																							std::shared_ptr<Businesses const> b, float latMin,
-																							float latMax, float longMin, float longMax) {
+std::vector<size_t> performQueryUsingHashJoin(std::shared_ptr<Reviews const> r,std::shared_ptr<Businesses const> b, float latMin,float latMax, float longMin, float longMax) {
 	using namespace std;
 	//////////////////// Build Side ////////////////////
 
 	auto buildStart = chrono::high_resolution_clock::now();
 	auto qualifyingBusinesses = getQualifyingBusinessesIDs(*b, latMin, latMax, longMin, longMax);
-	std::cout << "build: " << (chrono::duration_cast<chrono::milliseconds>(
-																 chrono::high_resolution_clock::now() - buildStart)
-																 .count())
-						<< std::endl;
+	std::cout << "build: " << (chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now() - buildStart).count())<< std::endl;
 
 	//////////////////// Probe Side ///////////////////
 	//
@@ -98,8 +93,7 @@ std::vector<size_t> performQueryUsingHashJoin(std::shared_ptr<Reviews const> r,
 	// 															 i * r->stars.size() / threads, (i + 1) * r->stars.size() /
 	// threads,
 	// 															 qualifyingBusinesses));
-	futures.push_back(std::async(std::launch::async, aggregateStarsOfQualifyingBusinesses, *r,
-															 qualifyingBusinesses));
+	futures.push_back(std::async(std::launch::async, aggregateStarsOfQualifyingBusinesses, *r, qualifyingBusinesses));
 
 	vector<size_t> groups;
 	for(auto& it : futures) {
@@ -110,10 +104,7 @@ std::vector<size_t> performQueryUsingHashJoin(std::shared_ptr<Reviews const> r,
 			groups[i] += groups1[i];
 	}
 
-	std::cout << "probe: " << (chrono::duration_cast<chrono::milliseconds>(
-																 chrono::high_resolution_clock::now() - probeStart)
-																 .count())
-						<< std::endl;
+	std::cout << "probe: " << (chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now() - probeStart).count())<< std::endl;
 
 	//////////////////// Output ////////////////////
 	return groups;
@@ -121,27 +112,18 @@ std::vector<size_t> performQueryUsingHashJoin(std::shared_ptr<Reviews const> r,
 
 ////////////////////////////////////////
 
-std::vector<size_t> performQueryUsingNestedLoopJoin(std::shared_ptr<Reviews const> r,
-																										std::shared_ptr<Businesses const> b,
-																										float latMin, float latMax, float longMin,
-																										float longMax) {
+std::vector<size_t> performQueryUsingNestedLoopJoin(std::shared_ptr<Reviews const> r,std::shared_ptr<Businesses const> b,float latMin, float latMax, float longMin,float longMax) {
 
 	using namespace std;
 	auto selectStart = chrono::high_resolution_clock::now();
 	auto qualies = getQualifyingBusinessesIDsVector(*b, latMin, latMax, longMin, longMax);
-	std::cout << "select: " << (chrono::duration_cast<chrono::milliseconds>(
-																	chrono::high_resolution_clock::now() - selectStart)
-																	.count())
-						<< std::endl;
+	std::cout << "select: " << (chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now() - selectStart).count())<< std::endl;
 
 	auto joinStart = chrono::high_resolution_clock::now();
 
 	auto groups = performNestedLoopJoinAndAggregation(*r, qualies);
 
-	std::cout << "nested loops join: " << (chrono::duration_cast<chrono::milliseconds>(
-																						 chrono::high_resolution_clock::now() - joinStart)
-																						 .count())
-						<< std::endl;
+	std::cout << "nested loops join: " << (chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now() - joinStart).count())<< std::endl;
 
 	return groups;
 }
