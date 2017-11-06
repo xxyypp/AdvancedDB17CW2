@@ -7,8 +7,22 @@ using namespace std;
 std::vector<std::string> getQualifyingBusinessesIDsVector(Businesses const& b, float latMin,float latMax, float longMin,float longMax) {
 	// This function needs to find all businesses that have within the
 	// specified latitude/longitude range and store their ids in the result vector
-	std::cout << "function getQualifyingBusinessesIDsVector not implemented" << std::endl;
-	throw std::logic_error("unimplemented");
+	//std::cout << "function getQualifyingBusinessesIDsVector not implemented" << std::endl;
+	//throw std::logic_error("unimplemented");
+
+    //////////////b.latitude is a vector -> b.latitude[i]//////////////////////
+
+	//if ((b.latitudes <= latMax)&&(b.latitudes > latMin)&&(b.longitudes <= longMax)&&(b.longitudes > longMin)){
+    //for (int i = 0; i < *b.size(); i++){
+//    for(auto it = *b.begin(); it != *b.end(); ++it){
+//        if ((*b->latitudes[i] <= latMax)){
+//            //getQualifyingBusinessesIDsVector.push_back(b.id);
+//        }
+//    }
+    int size = b.
+    //std::cout << b.ids[1] << endl;
+
+
 }
 
 std::vector<unsigned long>
@@ -20,8 +34,8 @@ performNestedLoopJoinAndAggregation(Reviews const& r, std::vector<std::string> c
 	// the qualifyingBusinessesIDs vector and build a histogram over their stars
 	// The return value is that histogram
 
-	std::cout << "function performNestedLoopJoinAndAggregation not implemented" << std::endl;
-	throw std::logic_error("unimplemented");
+	//std::cout << "function performNestedLoopJoinAndAggregation not implemented" << std::endl;
+	//throw std::logic_error("unimplemented");
 }
 
 //////////////////// Hash Join ////////////////////
@@ -29,8 +43,8 @@ performNestedLoopJoinAndAggregation(Reviews const& r, std::vector<std::string> c
 std::unordered_set<std::string> getQualifyingBusinessesIDs(Businesses const& b, float latMin,float latMax, float longMin,float longMax) {
 	// This function needs to find all businesses that have within the
 	// specified latitude/longitude range and store their ids in the result set
-	std::cout << "function getQualifyingBusinessesIDs not implemented" << std::endl;
-	throw std::logic_error("unimplemented");
+	//std::cout << "function getQualifyingBusinessesIDs not implemented" << std::endl;
+	//throw std::logic_error("unimplemented");
 }
 
 std::vector<unsigned long>
@@ -41,6 +55,6 @@ aggregateStarsOfQualifyingBusinesses(Reviews const& r,std::unordered_set<std::st
 	// This function needs to find all reviews that have business_ids in
 	// the qualifyingBusinessesIDs vector and build a histogram over their stars
 	// The return value is that histogram
-	std::cout << "function aggregateStarsOfQualifyingBusinesses not implemented" << std::endl;
-	throw std::logic_error("unimplemented");
+	//std::cout << "function aggregateStarsOfQualifyingBusinesses not implemented" << std::endl;
+	//throw std::logic_error("unimplemented");
 }
