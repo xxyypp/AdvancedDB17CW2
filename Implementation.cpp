@@ -11,8 +11,28 @@ std::vector<std::string> getQualifyingBusinessesIDsVector(Businesses const& b, f
 	//throw std::logic_error("unimplemented");
 
     //////////////b.latitude is a vector -> b.latitude[i]//////////////////////
-    
+
+	//if ((b.latitudes <= latMax)&&(b.latitudes > latMin)&&(b.longitudes <= longMax)&&(b.longitudes > longMin)){
+    //for (int i = 0; i < *b.size(); i++){
+//    for(auto it = *b.begin(); it != *b.end(); ++it){
+//        if ((*b->latitudes[i] <= latMax)){
+//            //getQualifyingBusinessesIDsVector.push_back(b.id);
+//        }
+//    }
     std::vector<std::string> res;
+    /*for(auto lat = b.latitudes.begin(); lat != b.latitudes.end(); ++lat){
+
+        }
+        for(auto longi = b.longitudes.begin(); longi != b.longitudes.end(); ++longi){
+            if((*longi <= longMax)&&(*longi > longMin)){
+                longi_res = true
+            }
+        }*/
+//    for(auto id = b.ids.begin(); id != b.ids.end(); ++id){
+//        if((*id).longitudes <= longMax){}
+//    }
+
+    //std::cout << "in 1st sub function: " << "b.ids.size() is " << b.ids.size() << std::endl;
 
     for (int i = 0; i < b.ids.size(); i++){
         if ((b.longitudes[i] <= longMax)&&(b.longitudes[i] >= longMin)){
@@ -43,8 +63,6 @@ performNestedLoopJoinAndAggregation(Reviews const& r, std::vector<std::string> c
     int ct3 = 0;
     int ct4 = 0;
     int ct5 = 0;
-
-    std::cout << "in 2nd sub function: " << "r.business_ids.size() is " << r.business_ids.size() << std::endl;
 
     for(int i = 0; i< r.business_ids.size(); i++){
         for (int j = 0; j <qualifyingBusinessesIDs.size();j++ ){
