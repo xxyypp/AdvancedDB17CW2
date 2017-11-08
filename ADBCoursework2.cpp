@@ -57,7 +57,7 @@ std::shared_ptr<Businesses const> getBusinesses() {
 							<< getExecutablePath() << std::endl;
 		exit(1);
 	}
-	auto r = make_unique<Businesses>();
+	auto r = make_unique<Businesses>(); //unique pointer
 	while(businessStream.good()) {
 		string businessID, latitude, longitude;
 		getline(businessStream, businessID, '\t');
@@ -68,6 +68,7 @@ std::shared_ptr<Businesses const> getBusinesses() {
 		r->longitudes.push_back(::atof(longitude.c_str()));
 	}
 	return std::shared_ptr<Businesses const>(const_cast<Businesses const*>(r.release()));
+	//release unique pointer, use shared ptr points to the original memory space
 }
 
 std::vector<size_t> performQueryUsingHashJoin(std::shared_ptr<Reviews const> r,std::shared_ptr<Businesses const> b, float latMin,float latMax, float longMin, float longMax) {
@@ -157,10 +158,10 @@ int main(int, char**) {
 	auto r = getReviews();
 	auto b = getBusinesses();
 
-	checkResults(printGroups(performQueryUsingHashJoin(r, b, 30.0, 45.7, -100.0, -1.0)), 0);
-	checkResults(printGroups(performQueryUsingHashJoin(r, b, 4.0, 40., -90.0, -40.0)), 1);
-	checkResults(printGroups(performQueryUsingHashJoin(r, b, 42.0, 43.0, -89.45, -89.25)), 2);
-	checkResults(printGroups(performQueryUsingHashJoin(r, b, 42.0, 43.0, -89.65, -89.45)), 3);
+//	checkResults(printGroups(performQueryUsingHashJoin(r, b, 30.0, 45.7, -100.0, -1.0)), 0);
+//	checkResults(printGroups(performQueryUsingHashJoin(r, b, 4.0, 40., -90.0, -40.0)), 1);
+//	checkResults(printGroups(performQueryUsingHashJoin(r, b, 42.0, 43.0, -89.45, -89.25)), 2);
+//	checkResults(printGroups(performQueryUsingHashJoin(r, b, 42.0, 43.0, -89.65, -89.45)), 3);
 	checkResults(printGroups(performQueryUsingNestedLoopJoin(r, b, 42.0, 43.0, -89.45, -89.25)), 2);
 	checkResults(printGroups(performQueryUsingNestedLoopJoin(r, b, 42.0, 43.0, -89.65, -89.45)), 3);
 	return 0;

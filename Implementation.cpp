@@ -11,18 +11,18 @@ std::vector<std::string> getQualifyingBusinessesIDsVector(Businesses const& b, f
 	//throw std::logic_error("unimplemented");
 
     //////////////b.latitude is a vector -> b.latitude[i]//////////////////////
+    
+    std::vector<std::string> res;
 
-	//if ((b.latitudes <= latMax)&&(b.latitudes > latMin)&&(b.longitudes <= longMax)&&(b.longitudes > longMin)){
-    //for (int i = 0; i < *b.size(); i++){
-//    for(auto it = *b.begin(); it != *b.end(); ++it){
-//        if ((*b->latitudes[i] <= latMax)){
-//            //getQualifyingBusinessesIDsVector.push_back(b.id);
-//        }
-//    }
-    int size = b.
-    //std::cout << b.ids[1] << endl;
+    for (int i = 0; i < b.ids.size(); i++){
+        if ((b.longitudes[i] <= longMax)&&(b.longitudes[i] >= longMin)){
+            if ((b.latitudes[i] <= latMax)&&(b.latitudes[i] >= latMin)){
+                res.push_back(b.ids[i]);
+            }
+        }
+    }
 
-
+    return res;
 }
 
 std::vector<unsigned long>
@@ -36,6 +36,44 @@ performNestedLoopJoinAndAggregation(Reviews const& r, std::vector<std::string> c
 
 	//std::cout << "function performNestedLoopJoinAndAggregation not implemented" << std::endl;
 	//throw std::logic_error("unimplemented");
+
+    int ct0 = 0;
+    int ct1 = 0;
+    int ct2 = 0;
+    int ct3 = 0;
+    int ct4 = 0;
+    int ct5 = 0;
+
+    std::cout << "in 2nd sub function: " << "r.business_ids.size() is " << r.business_ids.size() << std::endl;
+
+    for(int i = 0; i< r.business_ids.size(); i++){
+        for (int j = 0; j <qualifyingBusinessesIDs.size();j++ ){
+            if(r.business_ids[i] == qualifyingBusinessesIDs[j]){
+                if(r.stars[i] == 0){
+                    ct0++;
+                }else if(r.stars[i] == 1){
+                    ct1++;
+                }else if(r.stars[i] == 2){
+                    ct2++;
+                }else if(r.stars[i] == 3){
+                    ct3++;
+                }else if(r.stars[i] == 4){
+                    ct4++;
+                }else if(r.stars[i] == 5){
+                    ct5++;
+                }
+            }
+        }
+    }
+    std::vector<unsigned long> res;
+    res.push_back(ct0);
+    res.push_back(ct1);
+    res.push_back(ct2);
+    res.push_back(ct3);
+    res.push_back(ct4);
+    res.push_back(ct5);
+
+    return res;
 }
 
 //////////////////// Hash Join ////////////////////
