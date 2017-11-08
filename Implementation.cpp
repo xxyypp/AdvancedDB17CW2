@@ -12,27 +12,7 @@ std::vector<std::string> getQualifyingBusinessesIDsVector(Businesses const& b, f
 
     //////////////b.latitude is a vector -> b.latitude[i]//////////////////////
 
-	//if ((b.latitudes <= latMax)&&(b.latitudes > latMin)&&(b.longitudes <= longMax)&&(b.longitudes > longMin)){
-    //for (int i = 0; i < *b.size(); i++){
-//    for(auto it = *b.begin(); it != *b.end(); ++it){
-//        if ((*b->latitudes[i] <= latMax)){
-//            //getQualifyingBusinessesIDsVector.push_back(b.id);
-//        }
-//    }
     std::vector<std::string> res;
-    /*for(auto lat = b.latitudes.begin(); lat != b.latitudes.end(); ++lat){
-
-        }
-        for(auto longi = b.longitudes.begin(); longi != b.longitudes.end(); ++longi){
-            if((*longi <= longMax)&&(*longi > longMin)){
-                longi_res = true
-            }
-        }*/
-//    for(auto id = b.ids.begin(); id != b.ids.end(); ++id){
-//        if((*id).longitudes <= longMax){}
-//    }
-
-    //std::cout << "in 1st sub function: " << "b.ids.size() is " << b.ids.size() << std::endl;
 
     for (int i = 0; i < b.ids.size(); i++){
         if ((b.longitudes[i] <= longMax)&&(b.longitudes[i] >= longMin)){
@@ -101,6 +81,18 @@ std::unordered_set<std::string> getQualifyingBusinessesIDs(Businesses const& b, 
 	// specified latitude/longitude range and store their ids in the result set
 	//std::cout << "function getQualifyingBusinessesIDs not implemented" << std::endl;
 	//throw std::logic_error("unimplemented");
+
+    std::unordered_set<std::string> res;
+
+    for (int i = 0; i < b.ids.size(); i++){
+        if ((b.longitudes[i] <= longMax)&&(b.longitudes[i] >= longMin)){
+            if ((b.latitudes[i] <= latMax)&&(b.latitudes[i] >= latMin)){
+                res.insert(b.ids[i]);
+            }
+        }
+    }
+    return res;
+
 }
 
 std::vector<unsigned long>
@@ -113,4 +105,41 @@ aggregateStarsOfQualifyingBusinesses(Reviews const& r,std::unordered_set<std::st
 	// The return value is that histogram
 	//std::cout << "function aggregateStarsOfQualifyingBusinesses not implemented" << std::endl;
 	//throw std::logic_error("unimplemented");
+
+    int ct0 = 0;
+    int ct1 = 0;
+    int ct2 = 0;
+    int ct3 = 0;
+    int ct4 = 0;
+    int ct5 = 0;
+    std::string tmp;
+
+    for(int i = 0; i< r.business_ids.size(); i++){
+        if(qualifyingBusinesses.count(r.business_ids[i])){
+            if(r.stars[i] == 0){
+                ct0++;
+            }else if(r.stars[i] == 1){
+                ct1++;
+            }else if(r.stars[i] == 2){
+                ct2++;
+            }else if(r.stars[i] == 3){
+                ct3++;
+            }else if(r.stars[i] == 4){
+                ct4++;
+            }else if(r.stars[i] == 5){
+                ct5++;
+            }
+        }
+    }
+    std::vector<unsigned long> res;
+    res.push_back(ct0);
+    res.push_back(ct1);
+    res.push_back(ct2);
+    res.push_back(ct3);
+    res.push_back(ct4);
+    res.push_back(ct5);
+
+    return res;
+
+
 }
